@@ -55,7 +55,7 @@ command to be documented later
 ---
 
 ## 4. Install pyMC_Repeater
-Log back in via ssh and clone the dev repo so it can be installed:
+Log back in via ssh and clone the appropriate deb branch from the repo so it can be installed:
 
 ```bash
 git clone -b dev [https://github.com/rightup/pyMC_Repeater.git](https://github.com/rightup/pyMC_Repeater.git)
@@ -67,14 +67,15 @@ git clone -b feat/newRadios [https://github.com/rightup/pyMC_Repeater.git](https
 cd pyMC_Repeater
 ```
 
-### Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios. 
+> Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios. 
+>
 
-Run the install script. 
+Run the install script. This actually installs the code, service, etc. This script is also used to reset or update after install. 
 
 ```bash
 sudo bash ./manage.sh
 ```
-Select Install, and let it process. Exit the menu (arrow down and select Exit).
+Select *Install*, and let it process. Exit the menu (*arrow down and select Exit*).
 
 It will install pymc_repeater, services, etc, and start it up in web configure mode
 
@@ -126,6 +127,9 @@ ch341:
   pid: 21778
   vid: 6790
 ```
+
+> Note: use your specific ID's in the above section
+
 ---
 
 ### Save the edited file, then restart the service:
@@ -134,7 +138,7 @@ ch341:
 sudo systemctl restart pymc-repeater
 ```
 
-Note it is hyphen and not underscore in the above command!
+> Note it is hyphen and not underscore in the above command!
 
 ---
 
