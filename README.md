@@ -65,7 +65,7 @@ git clone -b feat/newRadios [https://github.com/rightup/pyMC_Repeater.git](https
 cd pyMC_Repeater
 ```
 
-* Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios. 
+* ==Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios.==
 
 
 Run the install script. This actually installs the code, service, etc. This script is also used to reset or update after install. 
@@ -111,7 +111,7 @@ letsmesh:
   status_interval: 300
 ```
 ### Update the txdelay if a rooftop or mobile node
-Increase the default tx_delay_factor to 1.25 or 1.5 for rooftop nodes to give high sites a chance to answer repeats first:
+For rooftop or mobile nodes increase the default tx_delay_factor to 1.25 or 1.5 to give high site repeaters a chance to repeat first:
 
 ```
 delays:
@@ -126,7 +126,7 @@ ch341:
   vid: 6790
 ```
 
-* Note: use your specific ID's in the above section
+* ==Note: use your specific ID's in the above section==
 
 ---
 
@@ -136,7 +136,7 @@ ch341:
 sudo systemctl restart pymc-repeater
 ```
 
-* Note it is hyphen and not underscore in the above command!
+* ==Note it is hyphen and not underscore in the above command!==
 
 ---
 
@@ -146,6 +146,6 @@ If you are using the hardened pi image, sync the zram before rebooting:
 ```bash
 sudo zram-config sync
 ```
-This will copy any logs and /var/lib files to static storage and restore them to zram upon boot. This is done automatically if you use the reboot command to reboot. But it's a good practice to sync before a reboot. 
+This will copy any logs and */var/lib* files to static storage and restore them to zram upon boot. This is done automatically if you use the reboot command to reboot. But it's a good practice to sync before a reboot. 
 
 Most of the dynamic files in /var/lib/pymc_repeater are things like stats and heard nodes which will be recreated if the server is powered down without sync. Or restored from prior copy if it has run in the past. The system will auto sync these dirs hourly. 
