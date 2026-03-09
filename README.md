@@ -159,3 +159,10 @@ sudo zram-config sync
 This will copy any logs and */var/lib* files to static storage and restore them to zram upon boot. This is done automatically if you use the reboot command to reboot. But it's a good practice to sync before a reboot. 
 
 Most of the dynamic files in /var/lib/pymc_repeater are things like stats and heard nodes which will be recreated if the server is powered down without sync. Or restored from prior copy if it has run in the past. The system will auto sync these dirs hourly. 
+
+## Todo as of 3/9/26:
+* Confirm correct branch (have *feat/newRadios* been incorporated into *dev*?)
+* update correct lsusb command and defaults for meshtoads
+* add links to ***Miketastic*** github
+* add links to main meshcore site for firmware nodes
+* add links to docker and Balena info
