@@ -62,7 +62,12 @@ git clone -b dev [https://github.com/rightup/pyMC_Repeater.git](https://github.c
 cd pyMC_Repeater
 ```
 
-### Note: as of 3/1/26, use the dev or newradios branch. The above command uses dev. 
+```bash
+git clone -b feat/newRadios [https://github.com/rightup/pyMC_Repeater.git](https://github.com/rightup/pyMC_Repeater.git)
+cd pyMC_Repeater
+```
+
+### Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios. 
 
 Run the install script. 
 
