@@ -10,7 +10,6 @@ As of ~3/1/26 docker capability has been added by ***Miketastic***. This is an e
 
 ***One final caveat: pymc_repeater is for pi based meshcore repeater nodes or similar. If you are looking to setup an esp32/nrf device this is not for you! :-)***
 
-
 ---
 
 ## 1. Initial OS Setup
