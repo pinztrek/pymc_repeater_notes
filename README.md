@@ -2,6 +2,8 @@
 
 This guide provides a step-by-step walkthrough for setting up a Raspberry Pi with a hardened Debian environment to run the pyMC_Repeater service.
 
+This approach is recommended for standalone (non-docker) repeaters and is optimized for remote operation. 
+
 Whenever possible code blocks have been provided which can be cut and pasted to execute the commands.
 
 ---
@@ -9,7 +11,11 @@ Whenever possible code blocks have been provided which can be cut and pasted to 
 ## 1. Initial OS Setup
 1. Use **Raspberry Pi Imager** to flash your SD card.
 2. Select **Other OS** > **Debian Bookworm 64-bit Lite** (No Desktop).
-3. Once flashed, boot the Pi and run the initial updates and install git:
+3. Once flashed, boot the Pi and ssh in, run the initial updates and install git:
+
+***Note: if you need wifi credentials you can add it during the imager step. Same for default user, and even ssh certificates. Much easier to do now than later.***
+
+Find your IP address to ssh in, or use the one of the *systemname.local* options debian normally sets up.
 
 ```bash
 sudo apt-get update && sudo apt-get -y install git
@@ -20,7 +26,7 @@ If you are not running on eMMC or an SSD, it is recommended to harden the OS. Th
 
 This only impacts /tmp, /var/log and /var/lib/pymc_repeater and meshtasticd which are the key dynamic dirs.
 
-It installs key required subsystems. We also install the cloudflared & tailscale daemons as they are often required behind firewalls / CGNAT. They are idle unless you enable them. Likewise they can be removed after the fact if desired. 
+It installs key required subsystems. We also install the cloudflared & tailscale daemons as they are often required behind firewalls / CGNAT. They are idle unless you enable them. Likewise they can be removed after the fact if desired. If behind a security layer like cloudflared with authentication, cockpit can be added to allow full admin via web.
 
 ```bash
 # get the dev version of my harden script & install it
