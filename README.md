@@ -6,6 +6,11 @@ This approach is recommended for standalone (non-docker) repeaters and is optimi
 
 Whenever possible code blocks have been provided which can be cut and pasted to execute the commands.
 
+As of ~3/1/26 docker capability has been added by ***Miketastic***. This is an excellent option, but beyond the scope of this document. Over time I may leverage Michael's work to create a Balena image which will further simplify provisioning and managing remote nodes. 
+
+***One final caveat: pymc_repeater is for pi based meshcore repeater nodes or similar. If you are looking to setup an esp32/nrf device this is not for you! :-)***
+
+
 ---
 
 ## 1. Initial OS Setup
