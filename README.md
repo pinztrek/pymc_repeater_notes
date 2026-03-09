@@ -65,7 +65,7 @@ git clone -b feat/newRadios [https://github.com/rightup/pyMC_Repeater.git](https
 cd pyMC_Repeater
 ```
 
-==Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios.==
+***Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios.***
 
 
 Run the install script. This actually installs the code, service, etc. This script is also used to reset or update after install. 
@@ -82,7 +82,7 @@ It will install pymc_repeater, services, etc, and start it up in web configure m
 ## 5. Web Configuration
 Copy the web install link (ex: http://172.16.30.87:8000) when finished. Access the page, and complete the 5 step config to finish your radio.
 
-==As of 3/1/26 the "submit" button is hard to see and has no label. It's the white box outline in the lower right of the window.==
+***As of 3/1/26 the "submit" button is hard to see and has no label. It's the white box outline in the lower right of the window.***
 
 Work through all steps. It will do the basic config and restart the service. If you have a supported board you are running!
 
@@ -126,7 +126,7 @@ ch341:
   vid: 6790
 ```
 
-==Note: use your specific ID's in the above section==
+***Note: use your specific ID's in the above section***
 
 ---
 
@@ -136,7 +136,7 @@ ch341:
 sudo systemctl restart pymc-repeater
 ```
 
-==Note it is hyphen and not underscore in the above command!==
+***Note it is hyphen and not underscore in the above command!***
 
 ---
 
