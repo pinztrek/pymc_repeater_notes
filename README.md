@@ -31,8 +31,6 @@ sudo bash harden.sh
 > [!IMPORTANT]
 > Tell it no to installing meshtasticd for now. Let it run to the end.
 
-### Note: 
-
 ## 3. Hardware Configuration (SPI)
 ### for SPI based hats- Turn on SPI and disable CS on SPI0.
 
@@ -67,8 +65,8 @@ git clone -b feat/newRadios [https://github.com/rightup/pyMC_Repeater.git](https
 cd pyMC_Repeater
 ```
 
-> Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios. 
->
+* Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios. 
+
 
 Run the install script. This actually installs the code, service, etc. This script is also used to reset or update after install. 
 
@@ -128,7 +126,7 @@ ch341:
   vid: 6790
 ```
 
-> Note: use your specific ID's in the above section
+* Note: use your specific ID's in the above section
 
 ---
 
@@ -138,7 +136,7 @@ ch341:
 sudo systemctl restart pymc-repeater
 ```
 
-> Note it is hyphen and not underscore in the above command!
+* Note it is hyphen and not underscore in the above command!
 
 ---
 
