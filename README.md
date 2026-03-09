@@ -2,12 +2,14 @@
 
 This guide provides a step-by-step walkthrough for setting up a Raspberry Pi with a hardened Debian environment to run the pyMC_Repeater service.
 
+Whenever possible code blocks have been provided which can be cut and pasted to execute the commands.
+
 ---
 
 ## 1. Initial OS Setup
 1. Use **Raspberry Pi Imager** to flash your SD card.
 2. Select **Other OS** > **Debian Bookworm 64-bit Lite** (No Desktop).
-3. Once flashed, boot the Pi and run the initial updates:
+3. Once flashed, boot the Pi and run the initial updates and install git:
 
 ```bash
 sudo apt-get update && sudo apt-get -y install git
@@ -15,6 +17,10 @@ sudo apt-get update && sudo apt-get -y install git
 
 ## 2. OS Hardening (Recommended)
 If you are not running on eMMC or an SSD, it is recommended to harden the OS. This moves dynamic and temporary directories into **zram** with persistence to reduce SD card wear.
+
+This only impacts /tmp, /var/log and /var/lib/pymc_repeater and meshtasticd which are the key dynamic dirs.
+
+It installs key required subsystems. We also install the cloudflared & tailscale daemons as they are often required behind firewalls / CGNAT. They are idle unless you enable them. Likewise they can be removed after the fact if desired. 
 
 ```bash
 # get the dev version of my harden script & install it
@@ -25,8 +31,10 @@ sudo bash harden.sh
 > [!IMPORTANT]
 > Tell it no to installing meshtasticd for now. Let it run to the end.
 
+### Note: 
+
 ## 3. Hardware Configuration (SPI)
-Turn on SPI and disable CS on SPI0.
+### for SPI based hats- Turn on SPI and disable CS on SPI0.
 
 ```bash
 echo -e "dtparam=spi=onndtoverlay=spi0-0cs" | sudo tee -a /boot/firmware/config.txt
@@ -38,48 +46,90 @@ You should be able to see the spi after the reboot:
 ls -l /dev/sp*
 ```
 
+### for USB based dongles- get the device ID's for use in configuration
+
+```bash
+command to be documented later
+```
+
 ---
 
 ## 4. Install pyMC_Repeater
-Log back in and clone the dev repo:
+Log back in via ssh and clone the dev repo so it can be installed:
 
 ```bash
 git clone -b dev [https://github.com/rightup/pyMC_Repeater.git](https://github.com/rightup/pyMC_Repeater.git)
 cd pyMC_Repeater
 ```
 
-Run the install script. For most you will want to select a Zebra (nebrahat) or Waveshare.
+### Note: as of 3/1/26, use the dev or newradios branch. The above command uses dev. 
+
+Run the install script. 
 
 ```bash
 sudo bash ./manage.sh
 ```
-
 Select Install, and let it process. Exit the menu (arrow down and select Exit).
+
+It will install pymc_repeater, services, etc, and start it up in web configure mode
 
 ---
 
 ## 5. Web Configuration
 Copy the web install link (ex: http://172.16.30.87:8000) when finished. Access the page, and complete the 5 step config to finish your radio.
 
+As of 3/1/26 the "submit" button is hard to see and has no label. It's the white box outline in the lower right of the window.
+
+Work through all steps. It will do the basic config and restart the service. If you have a supported board you are running!
+
+---
+## 6. Additional Configuration
+
+Most configuration items managing behavior are located in /etc/pymc_repeater/config.yaml
+
+Use your favorite editor to edit this file to adjust a few items
+
+```bash
+sudo nano /etc/pymc_repeater/config.yaml
+```
+### Update the letsmesh section:
+
+Update the broker index to 1, email, owner and iota code as needed.
+
+```bash
+letsmesh:
+  broker_index: 1
+  disallowed_packet_types: []
+  email: 'me@myemail.com'
+  enabled: true
+  iata_code: XXX
+  owner: 'Alan Barrow KM4BA'
+  status_interval: 300
+```
+### Update the txdelay if a rooftop or mobile node
+Increase the default tx_delay_factor to 1.25 or 1.5 for rooftop nodes to give high sites a chance to answer repeats first:
+
+```
+delays:
+  direct_tx_delay_factor: 1.0
+  tx_delay_factor: 1.5
+```
+### If using a usb device set the ID's for that particular device. Typically found by lsusb or similar. 
+
+```
+ch341:
+  pid: 21778
+  vid: 6790
+```
 ---
 
-## 6. Nebrahat / Zebra Additional Steps
-```bash
-sudo nano /etc/pymc_repeater/config.yaml 
-```
+### Save the edited file, then restart the service:
 
-Look for the radio pin config section and change to the following:
-* "busy_pin": 4,
-* "reset_pin": 18,
-* "rxen_pin": 25,
-* "use_dio2_rf": true,
-
-Look for the lat/long section and update your position. Remember longitude is negative (ex: -84.x). Set your Advert period down from 10 to 1 hr during testing.
-
-Save the file and restart the service:
 ```bash
 sudo systemctl restart pymc-repeater
 ```
+
+Note it is hyphen and not underscore in the above command!
 
 ---
 
@@ -89,3 +139,6 @@ If you are using the hardened pi image, sync the zram before rebooting:
 ```bash
 sudo zram-config sync
 ```
+This will copy any logs and /var/lib files to static storage and restore them to zram upon boot. This is done automatically if you use the reboot command to reboot. But it's a good practice to sync before a reboot. 
+
+Most of the dynamic files in /var/lib/pymc_repeater are things like stats and heard nodes which will be recreated if the server is powered down without sync. Or restored from prior copy if it has run in the past. The system will auto sync these dirs hourly. 
