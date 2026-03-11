@@ -96,6 +96,8 @@ Copy the web install link (ex: http://172.16.30.87:8000) when finished. Access t
 
 Work through all steps. It will do the basic config and restart the service. If you have a supported board you are running!
 
+You will want the US default (62.5 kHz bandwidth).
+
 ---
 ## 6. Additional Configuration
 
