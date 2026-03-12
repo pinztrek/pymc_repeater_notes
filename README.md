@@ -66,9 +66,11 @@ command to be documented later
 Log back in via ssh and clone the appropriate deb branch from the repo so it can be installed:
 
 
-***Note: as of 3/11/26, use the feat/companion branch as it's most current. 
+***Note: as of 3/11/26, use the feat/companion branch as it's most current.***
 
-at some point that branch will be merged into dev so if it's not available use the dev branch command instead***
+
+
+***At some point that branch will be merged into dev, so if it's not available use the dev branch command instead***
 
 
 ***feat/companion branch***
