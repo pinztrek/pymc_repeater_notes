@@ -65,17 +65,25 @@ command to be documented later
 ## 4. Install pyMC_Repeater
 Log back in via ssh and clone the appropriate deb branch from the repo so it can be installed:
 
+
+***Note: as of 3/11/26, use the feat/companion branch as it's most current. 
+
+at some point that branch will be merged into dev so if it's not available use the dev branch command instead***
+
+
+***feat/companion branch***
+
+```bash
+git clone -b feat/companion [https://github.com/rightup/pyMC_Repeater.git](https://github.com/rightup/pyMC_Repeater.git)
+cd pyMC_Repeater
+```
+***dev branch***
+
 ```bash
 git clone -b dev [https://github.com/rightup/pyMC_Repeater.git](https://github.com/rightup/pyMC_Repeater.git)
 cd pyMC_Repeater
 ```
-
-```bash
-git clone -b feat/newRadios [https://github.com/rightup/pyMC_Repeater.git](https://github.com/rightup/pyMC_Repeater.git)
-cd pyMC_Repeater
-```
-
-***Note: as of 3/1/26, use the dev or newradios branch. Use only one of the commands above, typically newRadios.***
+***note: use only one of the above!***
 
 
 Run the install script. This actually installs the code, service, etc. This script is also used to reset or update after install. 
